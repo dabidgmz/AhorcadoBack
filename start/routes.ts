@@ -20,7 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import UserRoutes from './Routes/UserRoutes'
-
+import CategoriaRoutes from './Routes/CategoriasRoutes'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
@@ -29,5 +29,8 @@ Route.group(() => {
 
   // User routes
   UserRoutes();
+
+  // Categorias routes
+  CategoriaRoutes();
   
 }).prefix('api/');
