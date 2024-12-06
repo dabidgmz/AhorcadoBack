@@ -1,22 +1,23 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column} from '@ioc:Adonis/Lucid/Orm';
+
 
 export default class Palabra extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: number;
 
   @column()
-  public palabra: string
-  
-  @column()
-  public descripcion: string
+  public palabra: string;
 
   @column()
-  public categoria_id: number
-  
+  public descripcion: string | null;
+
+  @column({ columnName: 'categoria_id' })
+  public categoriaId: number;
+
   @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
+  public createdAt: DateTime;
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
+  public updatedAt: DateTime;
 }
