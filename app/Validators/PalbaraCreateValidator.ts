@@ -14,7 +14,7 @@ export default class PalabraCreateValidator {
       rules.maxLength(255),
     ]),
     categoria_id: schema.number([
-      rules.exists({ table: 'categorias', column: 'id' }),  // Verifica que categoria_id exista
+         // Verifica que categoria_id exista
     ]),
   });
 

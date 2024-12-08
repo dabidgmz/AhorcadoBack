@@ -22,6 +22,8 @@ import Route from '@ioc:Adonis/Core/Route'
 import UserRoutes from './Routes/UserRoutes'
 import CategoriaRoutes from './Routes/CategoriasRoutes'
 import PalabraRoutes from './Routes/PalabrasRoutes'
+import JuegosRoutes from './Routes/JuegosRoutes'
+
 Route.get('/', async () => {
   return { hello: 'world' }
 })
@@ -37,4 +39,6 @@ Route.group(() => {
   // Palabras routes
   PalabraRoutes();
   
+  // Juegos routes
+  JuegosRoutes();
 }).prefix('api/');

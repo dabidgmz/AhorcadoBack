@@ -54,4 +54,48 @@ export default class PalabrasController {
     }
   }
 
+  public async getRandomPalabra({ response }: HttpContextContract) {
+    try {
+      const totalPalabras = await Database.from('palabras').count('* as total');
+      const total = totalPalabras[0].total;
+  
+      if (total === 0) {
+        return response.status(404).json({
+          message: 'No se encontraron palabras en la base de datos',
+        });
+      }
+  
+      const randomOffset = Math.floor(Math.random() * total);
+  
+      const randomPalabra = await Database
+        .from('palabras')
+        .join('categorias', 'categorias.id', '=', 'palabras.categoria_id')
+        .select(
+          'palabras.id',
+          'palabras.palabra',
+          'palabras.descripcion',
+          'palabras.categoria_id',
+          'categorias.name as categoria_nombre'
+        )
+        .offset(randomOffset) 
+        .limit(1);
+  
+      if (randomPalabra.length === 0) {
+        return response.status(404).json({
+          message: 'No se encontraron palabras en la base de datos',
+        });
+      }
+  
+      return response.status(200).json({
+        message: 'Palabra obtenida exitosamente',
+        palabra: randomPalabra[0],
+      });
+    } catch (error) {
+      return response.status(400).json({
+        message: 'Error al obtener una palabra aleatoria',
+        error: error.message,
+      });
+    }
+  }
+  
 }

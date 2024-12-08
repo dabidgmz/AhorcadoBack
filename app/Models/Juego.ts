@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
-
+import { BaseModel, column ,BelongsTo,belongsTo} from '@ioc:Adonis/Lucid/Orm'
+import Palabra from 'App/Models/Palabra';
 export default class Juego extends BaseModel {
   @column({ isPrimary: true })
   public id: number
@@ -23,8 +23,15 @@ export default class Juego extends BaseModel {
   @column()
   public intentos_maximos: number
 
+  
   @column()
   public palabra_id: number
+
+  @belongsTo(() => Palabra, {
+    foreignKey: 'palabra_id', 
+  })
+
+  public palabra: BelongsTo<typeof Palabra>;
   
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
